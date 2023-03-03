@@ -12,17 +12,22 @@ const countryInfo = document.querySelector('.country-info');
 searchBox.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 // searchBox.addEventListener('input', onInput);
 
+function clearElements() {
+  countryInfo.innerHTML = '';
+  countryList.innerHTML = '';
+}
+
 function onInput(event) {
   const valueInput = event.target.value.trim();
   if (!valueInput) {
+    clearElements();
     console.log(`Trim active`);
     return;
   }
   fetchCountries(valueInput)
     .then(users => {
       if (users.length > 10) {
-        countryInfo.innerHTML = '';
-        countryList.innerHTML = '';
+        clearElements();
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
@@ -41,18 +46,17 @@ function onInput(event) {
     .then(res => {
       console.log(
         `Country name:`,
-        res[0].name.official.toString(),
+        res[0].name.official,
         ` Capital:`,
-        res[0].capital.toString(),
+        Object.values(res[0].capital).join(', '),
         ` Population:`,
-        res[0].population.toString(),
+        res[0].population,
         ` languages:`,
-        Object.values(res[0].languages).join(',').toString()
+        Object.values(res[0].languages).join(', ')
       );
     })
     .catch(error => {
-      countryInfo.innerHTML = '';
-      countryList.innerHTML = '';
+      clearElements();
       Notiflix.Notify.failure('Oops, there is no country with that name');
     });
 }
@@ -62,8 +66,8 @@ function fastRender(users) {
     .map(user => {
       return `<li>      
       <p>
-      <img src="${user.flags.png.toString()}" width="25" alt="png">
-          <b>Country name</b>: ${user.name.official.toString()}</p>          
+      <img src="${user.flags.png}" width="25" alt="png">
+          <b>Country name</b>: ${user.name.official}</p>          
         </li>`;
     })
     .join('');
@@ -74,13 +78,11 @@ function renderUserList(users) {
     .map(user => {
       return `<li>      
       <p>
-      <img src="${user.flags.png.toString()}" width="40" alt="png">
-          <b>Country name</b>: ${user.name.official.toString()}</p>
-          <p><b>Capital</b>: ${user.capital.toString()}</p>
-          <p><b>Population</b>: ${user.population.toString()}</p>
-          <p><b>languages</b>: ${Object.values(user.languages)
-            .join(',')
-            .toString()}</p>
+      <img src="${user.flags.png}" width="40" alt="png">
+          <b>Country name</b>: ${user.name.official}</p>
+          <p><b>Capital</b>: ${Object.values(user.capital).join(', ')}</p>
+          <p><b>Population</b>: ${user.population}</p>
+          <p><b>languages</b>: ${Object.values(user.languages).join(', ')}</p>
         </li>`;
     })
     .join('');
