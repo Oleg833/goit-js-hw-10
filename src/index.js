@@ -17,6 +17,8 @@ function onInput(event) {
     fetchCountries(event.currentTarget.value)
       .then(users => {
         if (users.length > 10) {
+          countryInfo.innerHTML = '';
+          countryList.innerHTML = '';
           Notiflix.Notify.info(
             'Too many matches found. Please enter a more specific name.'
           );
