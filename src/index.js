@@ -50,9 +50,11 @@ function onInput(event) {
           Object.values(res[0].languages).join(',').toString()
         );
       })
-      .catch(error =>
-        Notiflix.Notify.failure('Oops, there is no country with that name')
-      ),
+      .catch(error => {
+        countryInfo.innerHTML = '';
+        countryList.innerHTML = '';
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+      }),
     DEBOUNCE_DELAY
   );
 }
