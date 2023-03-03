@@ -13,8 +13,12 @@ const countryInfo = document.querySelector('.country-info');
 form.addEventListener('input', onInput);
 
 function onInput(event) {
+  if (!event.currentTarget.value.trim()) {
+    console.log(`Trim`, event.currentTarget.value.trim());
+    return;
+  }
   debounce(
-    fetchCountries(event.currentTarget.value)
+    fetchCountries(event.currentTarget.value.trim())
       .then(users => {
         if (users.length > 10) {
           countryInfo.innerHTML = '';
