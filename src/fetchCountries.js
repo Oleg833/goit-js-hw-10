@@ -5,6 +5,7 @@ async function fetchCountries(param) {
   // const URL_ASK = `https://restcountries.com/v2/name/${param}?fields=name,capital,currencies`;
 
   const response = await fetch(BASE_URL);
+  console.log(response);
   const res = await response.json();
 
   return res;

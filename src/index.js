@@ -26,7 +26,7 @@ function onInput(event) {
   }
   fetchCountries(valueInput)
     .then(users => {
-      if (users.length > 10) {
+      if (users.length > 20) {
         clearElements();
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
@@ -44,6 +44,7 @@ function onInput(event) {
       return users;
     })
     .then(res => {
+      console.log(`www Nash`, res[0]);
       console.log(
         `Country name:`,
         res[0].name.official,
