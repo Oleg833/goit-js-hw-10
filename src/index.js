@@ -90,11 +90,11 @@ function renderUserList(users) {
   countryInfo.innerHTML = markup;
 }
 
-{
-  /* <svg width="170" height="170">
-  <use href="${user.flags.svg.toString()}"></use>
-</svg>; */
-}
+// {
+//   /* <svg width="170" height="170">
+//   <use href="${user.flags.svg.toString()}"></use>
+// </svg>; */
+// }
 
 // fetchCountries('jap')
 //   .then(users => {
