@@ -2,6 +2,7 @@ import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
 // import throttle from 'lodash.throttle';
+import axios from 'axios';
 
 import fetchCountries from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
@@ -44,7 +45,7 @@ function onInput(event) {
       return users;
     })
     .then(res => {
-      console.log(`www Nash`, res[0]);
+      console.log(`www Nash[0]`, res[0]);
       console.log(
         `Country name:`,
         res[0].name.official,

@@ -1,15 +1,29 @@
 export default fetchCountries;
 
+import axios from 'axios';
+
 async function fetchCountries(param) {
   const BASE_URL = `https://restcountries.com/v3.1/name/${param}?fields=name,capital,population,flags,languages`;
-  // const URL_ASK = `https://restcountries.com/v2/name/${param}?fields=name,capital,currencies`;
 
-  const response = await fetch(BASE_URL);
-  console.log(response);
-  const res = await response.json();
-
-  return res;
+  try {
+    const response = await axios.get(BASE_URL);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+// async function fetchCountries1(param) {
+//   const BASE_URL = `https://restcountries.com/v3.1/name/${param}?fields=name,capital,population,flags,languages`;
+//   // const URL_ASK = `https://restcountries.com/v2/name/${param}?fields=name,capital,currencies`;
+
+//   const response = await fetch(BASE_URL);
+//   console.log(response);
+//   const res = await response.json();
+
+//   return res;
+// }
 
 // fetch(URL_ASK).then(response => {
 //   if (!response.ok) {
